@@ -1,0 +1,27 @@
+-- Tabla de usuarios para autenticación
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(20) DEFAULT 'user',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de libros
+CREATE TABLE libros (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(255) NOT NULL,
+  codigo VARCHAR(50) UNIQUE NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de préstamos
+CREATE TABLE prestamos (
+  id SERIAL PRIMARY KEY,
+  fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  lector VARCHAR(255) NOT NULL,
+  libro_id INTEGER REFERENCES libros(id),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
