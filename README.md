@@ -25,20 +25,20 @@ Una pequeña aplicación web de biblioteca desarrollada con **Node.js**, **Expre
 
 ## 📅 Instalación y ejecución
 
-### 1. 🔄 Clona el repositorio
+### 1. 🔄 Clonar el repositorio
 
 ```bash
 git clone https://github.com/vwilmerfm/simple-biblioteca-api.git
 cd simple-biblioteca-api
 ```
 
-### 2. 📦 Instala las dependencias
+### 2. 📦 Instalar las dependencias
 
 ```bash
 npm install
 ```
 
-### 3. 🛠️ Configura la base de datos
+### 3. 🛠️ Configurar la base de datos
 
 Verifica que PostgreSQL esté instalado y corriendo. Crea una base de datos y configura la conexión en un archivo `.env` con el siguiente formato:
 
@@ -50,7 +50,7 @@ DB_USER=tu_usuario
 DB_PASSWORD=tu_contraseña
 ```
 
-### 4. 🔧 Ejecuta el script
+### 4. 🔧 Ejecutar el script
 
 Ejecuta el script SQL incluido:
 
@@ -58,7 +58,7 @@ Ejecuta el script SQL incluido:
 psql -U tu_usuario -d nombre_de_tu_base -f estructura_bd.sql
 ```
 
-### 5. ▶️ Inicia la aplicación
+### 5. ▶️ Iniciar la aplicación
 
 ```bash
 npm run start
@@ -88,7 +88,7 @@ Las peticiones para probar los endpoints están disponibles en la plataforma del
 
 ## 🧠 Autor y créditos
 
-Desarrollado como parte del diplomado en **Diseño y Modelado de Software - USIP**.
+Desarrollado como parte del diplomado en **MOD 2 - ARQUITECTURA DE SOFTWARE - USIP**.
 
 ---
 
