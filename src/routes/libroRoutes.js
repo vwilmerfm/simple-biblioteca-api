@@ -18,7 +18,7 @@ router.post(
     isAdmin,
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('codigo', 'El código es obligatorio').not().isEmpty(),
-    check('autor', 'El autor es obligatorio').not().isEmpty()
+    check('autor_id', 'El autor es obligatorio').not().isEmpty()
   ],
   libroController.createLibro
 );

@@ -68,6 +68,24 @@ class Prestamo {
       throw new Error(`Error al buscar préstamos por libro: ${error.message}`);
     }
   }
+
+  static async delete(id) {
+    try {
+      const result = await db.query(
+        'DELETE FROM prestamos WHERE id = $1 RETURNING *',
+        [id]
+      );
+      
+      if (result.rowCount === 0) {
+        throw new Error('Préstamo no encontrado');
+      }
+      
+      return result.rows[0];
+    } catch (error) {
+      throw new Error(`Error al eliminar préstamo: ${error.message}`);
+    }
+  }
+  
 }
 
 module.exports = Prestamo;

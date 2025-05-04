@@ -25,3 +25,23 @@ CREATE TABLE prestamos (
   libro_id INTEGER REFERENCES libros(id),
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Cambios para la practica final
+
+-- Tabla de autores
+CREATE TABLE autores
+(
+    id         SERIAL PRIMARY KEY,
+    nombre     VARCHAR(100) NOT NULL,
+    bio        TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla de libros (Modificada)
+ALTER TABLE libros 
+DROP COLUMN autor,
+ADD COLUMN autor_id INTEGER REFERENCES autores(id);
+
+
+-- Add a foreign key
+ALTER TABLE libros ADD CONSTRAINT fk_libros_autores FOREIGN KEY (autor_id) REFERENCES autores (id);

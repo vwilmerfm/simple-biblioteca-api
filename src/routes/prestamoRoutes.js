@@ -30,4 +30,6 @@ router.get('/lector/:lector', isAuth, prestamoController.getPrestamosByLector);
 // Obtener estadísticas de préstamos
 router.get('/estadisticas/general', isAuth, prestamoController.getEstadisticas);
 
+router.delete('/:id', [isAuth], prestamoController.deletePrestamo);
+
 module.exports = router;

@@ -5,7 +5,7 @@ class Libro {
     this.id = id;
     this.nombre = nombre;
     this.codigo = codigo;
-    this.autor = autor;
+    this.autor_id = autor;
   }
 
   static async findAll() {
@@ -15,7 +15,7 @@ class Libro {
         libro.id,
         libro.nombre,
         libro.codigo,
-        libro.autor
+        libro.autor_id
       ));
     } catch (error) {
       throw new Error(`Error al buscar libros: ${error.message}`);
@@ -31,7 +31,7 @@ class Libro {
       }
       
       const libro = result.rows[0];
-      return new Libro(libro.id, libro.nombre, libro.codigo, libro.autor);
+      return new Libro(libro.id, libro.nombre, libro.codigo, libro.autor_id);
     } catch (error) {
       throw new Error(`Error al buscar libro: ${error.message}`);
     }
@@ -46,7 +46,7 @@ class Libro {
       }
       
       const libro = result.rows[0];
-      return new Libro(libro.id, libro.nombre, libro.codigo, libro.autor);
+      return new Libro(libro.id, libro.nombre, libro.codigo, libro.autor_id);
     } catch (error) {
       throw new Error(`Error al buscar libro por código: ${error.message}`);
     }
@@ -57,14 +57,14 @@ class Libro {
       // Si el libro tiene ID, actualizamos; si no, creamos nuevo
       if (this.id) {
         const result = await db.query(
-          'UPDATE libros SET nombre = $1, codigo = $2, autor = $3 WHERE id = $4 RETURNING *',
-          [this.nombre, this.codigo, this.autor, this.id]
+          'UPDATE libros SET nombre = $1, codigo = $2, autor_id = $3 WHERE id = $4 RETURNING *',
+          [this.nombre, this.codigo, this.autor_id, this.id]
         );
         return result.rows[0];
       } else {
         const result = await db.query(
-          'INSERT INTO libros (nombre, codigo, autor) VALUES ($1, $2, $3) RETURNING *',
-          [this.nombre, this.codigo, this.autor]
+          'INSERT INTO libros (nombre, codigo, autor_id) VALUES ($1, $2, $3) RETURNING *',
+          [this.nombre, this.codigo, this.autor_id]
         );
         this.id = result.rows[0].id;
         return result.rows[0];

@@ -1,5 +1,7 @@
 const { validationResult } = require('express-validator');
 const prestamoService = require('../services/prestamoService');
+const notifier = require('../observers/PrestamoNotifier');
+const Prestamo = require('../models/Prestamo'); 
 
 // Obtener todos los préstamos
 exports.getAllPrestamos = async (req, res) => {
@@ -90,5 +92,39 @@ exports.getEstadisticas = async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error al obtener estadísticas de préstamos' });
+  }
+};
+
+exports.deletePrestamo = async (req, res) => {
+  try {
+    const prestamoExistente = await Prestamo.findById(req.params.id);
+    if (!prestamoExistente) {
+      return res.status(404).json({ 
+        success: false,
+        message: 'Préstamo no encontrado'
+      });
+    }
+
+    const prestamoEliminado = await Prestamo.delete(req.params.id);
+    
+    // Notificar (usando el email del middleware auth)
+    await notifier.notify(req.params.id, req.usuario.email);
+
+    res.json({ 
+      success: true,
+      message: 'Préstamo eliminado y notificado',
+      data: prestamoEliminado
+    });
+    
+  } catch (error) {
+    console.error('Error en deletePrestamo:', error);
+    
+    const statusCode = error.message.includes('no encontrado') ? 404 : 500;
+    
+    res.status(statusCode).json({ 
+      success: false,
+      message: 'Error al eliminar préstamo',
+      error: error.message
+    });
   }
 };

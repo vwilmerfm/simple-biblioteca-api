@@ -35,10 +35,10 @@ exports.createLibro = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
-  const { nombre, codigo, autor } = req.body;
+  const { nombre, codigo, autor_id } = req.body;
 
   try {
-    const libro = await libroService.createLibro(nombre, codigo, autor);
+    const libro = await libroService.createLibro(nombre, codigo, autor_id);
     
     res.status(201).json({
       message: 'Libro creado con éxito',

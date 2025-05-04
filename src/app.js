@@ -6,6 +6,7 @@ require('dotenv').config();
 const authRoutes = require('./routes/authRoutes');
 const libroRoutes = require('./routes/libroRoutes');
 const prestamoRoutes = require('./routes/prestamoRoutes');
+const autorRoutes = require('./routes/autorRoutes');
 
 // Inicializar app
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/libros', libroRoutes);
 app.use('/api/prestamos', prestamoRoutes);
+app.use('/api/autores', autorRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
